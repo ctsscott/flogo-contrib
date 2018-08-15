@@ -38,6 +38,7 @@ func TestCreate(t *testing.T) {
 	}
 }
 
+// Test success
 func TestEval(t *testing.T) {
 
 	defer func() {
@@ -51,6 +52,37 @@ func TestEval(t *testing.T) {
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
 	tc.SetInput("jsonPath", "test")
+	tc.SetInput("jsonString", "{\"test\":\"value\"}")
+
+	done, err := act.Eval(tc)
+	if !done {
+		fmt.Println(err)
+	}
+
+	//check result attr
+	b, _ := json.Marshal(tc.GetOutput("output"))
+	fmt.Println(string(b))
+
+	if strings.Compare(string(b), "\"value\"") != 0 {
+		t.FailNow()
+	}
+
+}
+
+// Test success
+func TestFail(t *testing.T) {
+
+	defer func() {
+		if r := recover(); r != nil {
+			t.Failed()
+			t.Errorf("panic during execution: %v", r)
+		}
+	}()
+
+	act := NewActivity(getActivityMetadata())
+	tc := test.NewTestActivityContext(getActivityMetadata())
+
+	tc.SetInput("jsonPath", "test1111")
 	tc.SetInput("jsonString", "{\"test\":\"value\"}")
 
 	done, err := act.Eval(tc)

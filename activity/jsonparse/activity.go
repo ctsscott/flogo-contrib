@@ -7,7 +7,7 @@ import (
 )
 
 // log is the default package logger
-var activityLog = logger.GetLogger("activity-flogo-log")
+var activityLog = logger.GetLogger("activity-flogo-jsonparse")
 
 const (
 	jsonPath   = "jsonPath"
@@ -15,7 +15,7 @@ const (
 	ovOutput   = "output"
 )
 
-// MyJsonParseActivity is a stub for your Activity implementation
+// MYJSONParseActivity is a stub for your Activity implementation
 type MYJSONParseActivity struct {
 	metadata *activity.Metadata
 }
@@ -39,9 +39,18 @@ func (a *MYJSONParseActivity) Eval(context activity.Context) (done bool, err err
 	jsonParsed, err := gabs.ParseJSON([]byte(jsonS))
 	var value string
 	// var ok bool
-	value, _ = jsonParsed.Path(jsonP).Data().(string)
+	value, ok := jsonParsed.Path(jsonP).Data().(string)
+
+	if !ok {
+		activityLog.Error("Parse failed")
+	}
+
 	activityLog.Infof("Parsed value from json: %s\n", value)
-	context.SetOutput(ovOutput, value)
+	if value != "" {
+		context.SetOutput(ovOutput, value)
+	} else {
+
+	}
 
 	return true, nil
 }
