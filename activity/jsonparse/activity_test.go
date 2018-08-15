@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"strings"
 	"testing"
 
 	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
@@ -51,8 +50,16 @@ func TestEval(t *testing.T) {
 	act := NewActivity(getActivityMetadata())
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
-	tc.SetInput("jsonPath", "test")
-	tc.SetInput("jsonString", "{\"test\":\"value\"}")
+	tc.SetInput("jsonPath1", "Publisher.IsDocker")
+	tc.SetInput("jsonString1", "{\"Publisher\":{\"Timestamp\":\"15/08/2018 03:14:58.958 +0000\",\"IsDocker\":true,\"Domain\":\"CTSL\",\"RvService\":\"27496\",\"RvDaemon\":\"cdcxpd0698.con-way.com:7474\",\"RvNetwork\":\";\",\"Host\":\"48336f75b07a\"},\"Event\":{\"MicroagentID\":\"COM.TIBCO.ADAPTER.bwengine.CTSL.ConwayRamNotification.ConwayRamNotification\",\"Agent\":\"cdcxpd0578\",\"NewPID\":28916,\"Alive\":true}}")
+	tc.SetInput("jsonType1", "boolean")
+	tc.SetInput("jsonPath2", "Publisher.Domain")
+	tc.SetInput("jsonString2", "{\"Publisher\":{\"Timestamp\":\"15/08/2018 03:14:58.958 +0000\",\"IsDocker\":true,\"Domain\":\"CTSL\",\"RvService\":\"27496\",\"RvDaemon\":\"cdcxpd0698.con-way.com:7474\",\"RvNetwork\":\";\",\"Host\":\"48336f75b07a\"},\"Event\":{\"MicroagentID\":\"COM.TIBCO.ADAPTER.bwengine.CTSL.ConwayRamNotification.ConwayRamNotification\",\"Agent\":\"cdcxpd0578\",\"NewPID\":28916,\"Alive\":true}}")
+	tc.SetInput("jsonType2", "string")
+
+	tc.SetInput("jsonPath3", "Event.MicroagentID")
+	tc.SetInput("jsonString3", "{\"Publisher\":{\"Timestamp\":\"15/08/2018 03:14:58.958 +0000\",\"IsDocker\":true,\"Domain\":\"CTSL\",\"RvService\":\"27496\",\"RvDaemon\":\"cdcxpd0698.con-way.com:7474\",\"RvNetwork\":\";\",\"Host\":\"48336f75b07a\"},\"Event\":{\"MicroagentID\":\"COM.TIBCO.ADAPTER.bwengine.CTSL.ConwayRamNotification.ConwayRamNotification\",\"Agent\":\"cdcxpd0578\",\"NewPID\":28916,\"Alive\":true}}")
+	tc.SetInput("jsonType3", "string")
 
 	done, err := act.Eval(tc)
 	if !done {
@@ -60,16 +67,22 @@ func TestEval(t *testing.T) {
 	}
 
 	//check result attr
-	b, _ := json.Marshal(tc.GetOutput("output"))
+	a, _ := json.Marshal(tc.GetOutput("output1"))
+	fmt.Println(string(a))
+
+	b, _ := json.Marshal(tc.GetOutput("output2"))
 	fmt.Println(string(b))
 
-	if strings.Compare(string(b), "\"value\"") != 0 {
-		t.FailNow()
-	}
+	c, _ := json.Marshal(tc.GetOutput("output3"))
+	fmt.Println(string(c))
+
+	//if strings.Compare(string(b), "\"value\"") != 0 {
+	//	t.FailNow()
+	//}
 
 }
 
-// Test success
+/* Test success
 func TestFail(t *testing.T) {
 
 	defer func() {
@@ -98,4 +111,4 @@ func TestFail(t *testing.T) {
 		t.FailNow()
 	}
 
-}
+} */

@@ -6,18 +6,37 @@
   "description": "Parse json returning the specified path",
   "author": "Scott Robertson <scott.robertson@xpo.com>",
   "inputs": [
-    {
-      "name": "jsonPath",
-      "type": "string"
+    { "name": "jsonPath1","type": "string"},
+    { "name": "jsonString1", "type": "string"},
+    { "name": "jsonType1",
+      "type": "string",
+      "allowed": [
+        "string",
+        "boolean"
+      ]
     },
-    { "name": "jsonString", 
-      "type": "string" 
+    { "name": "jsonPath2","type": "string"},
+    { "name": "jsonString2", "type": "string"},
+    { "name": "jsonType2",
+      "type": "string",
+      "allowed": [
+        "string",
+        "boolean"
+      ]
+    },
+    { "name": "jsonPath3","type": "string"},
+    { "name": "jsonString3", "type": "string"},
+    { "name": "jsonType3",
+      "type": "string",
+      "allowed": [
+        "string",
+        "boolean"
+      ]
     }
   ],
   "outputs": [
-    {
-      "name": "output",
-      "type": "string"
-    }
+    { "name": "output1","type": "string"},
+    { "name": "output2", "type": "string" },
+    { "name": "output3", "type": "string" }
   ]
 }
