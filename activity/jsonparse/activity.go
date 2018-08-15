@@ -39,7 +39,7 @@ func (a *MYJSONParseActivity) Eval(context activity.Context) (done bool, err err
 
 	jsonP := context.GetInput(jsonPath).(string)
 	jsonS := context.GetInput(jsonString).(string)
-	activityLog.Infof("Parsing -- %s --for value %s\n", jsonS, jsonP)
+	activityLog.Debugf("Parsing -- %s --for value %s\n", jsonS, jsonP)
 	jsonParsed, err := gabs.ParseJSON([]byte(jsonS))
 	var value string
 	// var ok bool
@@ -47,13 +47,12 @@ func (a *MYJSONParseActivity) Eval(context activity.Context) (done bool, err err
 
 	if !ok {
 		activityLog.Error("Parse failed")
+		context.SetOutput(ovOutput, "Parse failed for -- "+jsonP+" -- in string -- "+jsonS)
 	}
 
-	activityLog.Infof("Parsed value from json: %s\n", value)
+	activityLog.Debugf("Parsed value from json: %s\n", value)
 	if value != "" {
 		context.SetOutput(ovOutput, value)
-	} else {
-		context.SetOutput(ovOutput, "parse failed")
 	}
 
 	return true, nil
