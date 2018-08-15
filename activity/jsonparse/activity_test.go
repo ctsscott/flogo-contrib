@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"strings"
 	"testing"
 
 	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
@@ -50,7 +51,7 @@ func TestEval(t *testing.T) {
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
 	tc.SetInput("jsonPath", "test")
-	tc.SetInput("jsonString", "{\"test\":\"\"value\"}")
+	tc.SetInput("jsonString", "{\"test\":\"value\"}")
 
 	done, err := act.Eval(tc)
 	if !done {
@@ -60,4 +61,9 @@ func TestEval(t *testing.T) {
 	//check result attr
 	b, _ := json.Marshal(tc.GetOutput("output"))
 	fmt.Println(string(b))
+
+	if strings.Compare(string(b), "\"value\"") != 0 {
+		t.FailNow()
+	}
+
 }
