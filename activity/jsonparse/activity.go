@@ -1,15 +1,13 @@
 package jsonparse
 
 import (
-	"fmt"
-
 	"github.com/Jeffail/gabs"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
 
 // log is the default package logger
-var log = logger.GetLogger("activity-jsonParse")
+var activityLog = logger.GetLogger("activity-flogo-log")
 
 const (
 	jsonPath   = "jsonPath"
@@ -37,18 +35,12 @@ func (a *Activity) Eval(context activity.Context) (done bool, err error) {
 
 	jsonP := context.GetInput(jsonPath).(string)
 	jsonS := context.GetInput(jsonString).(string)
-
-	fmt.Printf("jsonP: %s\n", jsonP)
-	fmt.Printf("jsonS: %s\n", jsonS)
-
+	activityLog.Infof("Parsing -- %s --for value %s\n", jsonS, jsonP)
 	jsonParsed, err := gabs.ParseJSON([]byte(jsonS))
-
 	var value string
 	// var ok bool
-
 	value, _ = jsonParsed.Path(jsonP).Data().(string)
-
-	log.Debugf("Parsed value from json: %s", value)
+	activityLog.Infof("Parsed value from json: %s\n", value)
 	context.SetOutput(ovOutput, value)
 
 	return true, nil

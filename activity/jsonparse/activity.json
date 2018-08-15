@@ -4,14 +4,15 @@
   "ref": "github.com/ctsscott/flogo-contrib/activity/jsonparse",
   "type": "flogo:activity",
   "description": "Parse json returning the specified path",
-  "author": "Your Name <you.name@example.org>",
+  "author": "Scott Robertson <scott.robertson@xpo.com>",
   "inputs": [
     {
       "name": "jsonPath",
       "type": "string"
     },
     { "name": "jsonString", 
-      "type": "string" }
+      "type": "string" 
+    }
   ],
   "outputs": [
     {
