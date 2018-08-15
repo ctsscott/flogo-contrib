@@ -4,7 +4,12 @@ This activity can be used to parse a json string for a given path.
 ## Installation
 ### Flogo CLI
 ```bash
-flogo install github.com/ctsscott/flogo-activities/activities/jsonparse
+flogo install github.com/ctsscott/flogo-contrib/activity/jsonparse
+```
+
+### Flogo Web
+```bash
+https://github.com/ctsscott/flogo-contrib/activity/jsonparse
 ```
 
 ## Schema
