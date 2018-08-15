@@ -15,23 +15,23 @@ const (
 	ovOutput   = "output"
 )
 
-// Activity is a stub for your Activity implementation
-type Activity struct {
+// MyJsonParseActivity is a stub for your Activity implementation
+type MYJSONParseActivity struct {
 	metadata *activity.Metadata
 }
 
 // NewActivity creates a new activity
 func NewActivity(metadata *activity.Metadata) activity.Activity {
-	return &Activity{metadata: metadata}
+	return &MYJSONParseActivity{metadata: metadata}
 }
 
 // Metadata implements activity.Activity.Metadata
-func (a *Activity) Metadata() *activity.Metadata {
+func (a *MYJSONParseActivity) Metadata() *activity.Metadata {
 	return a.metadata
 }
 
 // Eval implements activity.Activity.Eval
-func (a *Activity) Eval(context activity.Context) (done bool, err error) {
+func (a *MYJSONParseActivity) Eval(context activity.Context) (done bool, err error) {
 
 	jsonP := context.GetInput(jsonPath).(string)
 	jsonS := context.GetInput(jsonString).(string)
