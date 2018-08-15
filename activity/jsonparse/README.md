@@ -21,10 +21,11 @@ Inputs and Outputs:
 
 ```json
 "inputs": [
-    { "name": "jsonPath1","type": "string"},
-    { "name": "jsonString1", "type": "string"},
+    { "name": "jsonPath1","type": "string", "required": true},
+    { "name": "jsonString1", "type": "string", "required": true},
     { "name": "jsonType1",
       "type": "string",
+      "required": true, 
       "allowed": [
         "string",
         "boolean"
