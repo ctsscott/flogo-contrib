@@ -1,0 +1,22 @@
+{
+  "name": "JSON Parse",
+  "version": "0.0.1",
+  "ref": "github.com/ctsscott/flogo-activities/activities/jsonparse",
+  "type": "flogo:activity",
+  "description": "Parse json returning the specified path",
+  "author": "Your Name <you.name@example.org>",
+  "inputs": [
+    {
+      "name": "jsonPath",
+      "type": "string"
+    },
+    { "name": "jsonString", 
+      "type": "string" }
+  ],
+  "outputs": [
+    {
+      "name": "output",
+      "type": "string"
+    }
+  ]
+}
