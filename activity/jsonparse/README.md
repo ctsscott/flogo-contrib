@@ -1,10 +1,10 @@
-# Parse JSON
+# JSON Parse
 This activity can be used to parse a json string for a given path.
 
 ## Installation
 ### Flogo CLI
 ```bash
-flogo install github.com/ctsscott/flogo-activities/activities/parsejson
+flogo install github.com/ctsscott/flogo-activities/activities/jsonparse
 ```
 
 ## Schema
