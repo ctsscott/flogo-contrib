@@ -15,6 +15,10 @@ const (
 	ovOutput   = "output"
 )
 
+func init() {
+	activityLog.SetLogLevel(logger.DebugLevel)
+}
+
 // MYJSONParseActivity is a stub for your Activity implementation
 type MYJSONParseActivity struct {
 	metadata *activity.Metadata
@@ -49,7 +53,7 @@ func (a *MYJSONParseActivity) Eval(context activity.Context) (done bool, err err
 	if value != "" {
 		context.SetOutput(ovOutput, value)
 	} else {
-
+		context.SetOutput(ovOutput, "parse failed")
 	}
 
 	return true, nil
